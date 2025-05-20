@@ -1,17 +1,17 @@
 /**
- * Convert temperature from Celsius to Fahrenheit
- * @param celsius Temperature in Celsius
- * @returns Temperature in Fahrenheit
+ * Utility functions for temperature conversion
  */
-export function celsiusToFahrenheit(celsius: number): number {
-  return (celsius * 9/5) + 32;
-}
 
 /**
- * Convert temperature from Fahrenheit to Celsius
- * @param fahrenheit Temperature in Fahrenheit
- * @returns Temperature in Celsius
+ * Convert Celsius to Fahrenheit
  */
-export function fahrenheitToCelsius(fahrenheit: number): number {
+export const celsiusToFahrenheit = (celsius: number): number => {
+  return (celsius * 9/5) + 32;
+};
+
+/**
+ * Convert Fahrenheit to Celsius
+ */
+export const fahrenheitToCelsius = (fahrenheit: number): number => {
   return (fahrenheit - 32) * 5/9;
-}
+};
