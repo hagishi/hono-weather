@@ -59,6 +59,32 @@ describe('Weather API', () => {
     expect(data).toHaveProperty('timestamp')
   })
 
+  // Test the /weather/coordinates endpoint
+  it('should return weather data for specific coordinates', async () => {
+    const lat = '35.6895'
+    const lon = '139.6917'
+    const res = await app.request(`/weather/coordinates?lat=${lat}&lon=${lon}`)
+    expect(res.status).toBe(200)
+    
+    const data = await res.json()
+    expect(data.coordinates).toEqual({ latitude: lat, longitude: lon })
+    expect(data).toHaveProperty('temperature')
+    expect(data).toHaveProperty('condition')
+    expect(data).toHaveProperty('humidity')
+    expect(data).toHaveProperty('windSpeed')
+    expect(data).toHaveProperty('timestamp')
+  })
+
+  // Test the /weather/coordinates endpoint with missing parameters
+  it('should return 400 when coordinates parameters are missing', async () => {
+    const res = await app.request('/weather/coordinates')
+    expect(res.status).toBe(400)
+    
+    const data = await res.json()
+    expect(data.message).toContain('Missing required parameters')
+    expect(data.status).toBe(400)
+  })
+
   // Test the 404 handling
   it('should return 404 for non-existent routes', async () => {
     const res = await app.request('/non-existent-route')

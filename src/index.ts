@@ -18,7 +18,8 @@ app.get('/', (c) => {
     endpoints: [
       '/weather - Get current weather',
       '/weather/forecast - Get weather forecast',
-      '/weather/:location - Get weather for a specific location'
+      '/weather/:location - Get weather for a specific location',
+      '/weather/coordinates?lat=<latitude>&lon=<longitude> - Get weather for specific coordinates'
     ]
   });
 });
@@ -56,6 +57,24 @@ app.get('/weather/forecast', (c) => {
       precipitation: 0
     }
   ]);
+});
+
+app.get('/weather/coordinates', (c) => {
+  const lat = c.req.query('lat');
+  const lon = c.req.query('lon');
+  
+  if (!lat || !lon) {
+    return c.json({ message: 'Missing required parameters: lat and lon', status: 400 }, 400);
+  }
+  
+  return c.json({
+    coordinates: { latitude: lat, longitude: lon },
+    temperature: 22,
+    condition: 'Partly Cloudy',
+    humidity: 68,
+    windSpeed: 6,
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.get('/weather/:location', (c) => {
