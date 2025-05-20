@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: Weather API
+  description: A weather API built with Hono.js
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Get API information
+      tags:
+        - Info
+      responses:
+        '200':
+          description: API information response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  version:
+                    type: string
+                  endpoints:
+                    type: array
+                    items:
+                      type: string
+  /weather:
+    get:
+      summary: Get current weather
+      tags:
+        - Weather
+      responses:
+        '200':
+          description: Current weather data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  temperature:
+                    type: number
+                  condition:
+                    type: string
+                  humidity:
+                    type: number
+                  windSpeed:
+                    type: number
+                  timestamp:
+                    type: string
+                    format: date-time
+  /weather/forecast:
+    get:
+      summary: Get weather forecast
+      tags:
+        - Weather
+      responses:
+        '200':
+          description: Weather forecast data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                    temperature:
+                      type: object
+                      properties:
+                        min:
+                          type: number
+                        max:
+                          type: number
+                    condition:
+                      type: string
+                    precipitation:
+                      type: number
+  /weather/{location}:
+    get:
+      summary: Get weather by location
+      tags:
+        - Weather
+      parameters:
+        - name: location
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Location name
+      responses:
+        '200':
+          description: Weather data for location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  temperature:
+                    type: number
+                  condition:
+                    type: string
+                  humidity:
+                    type: number
+                  windSpeed:
+                    type: number
+                  timestamp:
+                    type: string
+                    format: date-time
+  /weather/coordinates:
+    get:
+      summary: Get weather by coordinates
+      tags:
+        - Weather
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Latitude
+        - name: lon
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Longitude
+      responses:
+        '200':
+          description: Weather data for coordinates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coordinates:
+                    type: object
+                    properties:
+                      latitude:
+                        type: string
+                      longitude:
+                        type: string
+                  temperature:
+                    type: number
+                  condition:
+                    type: string
+                  humidity:
+                    type: number
+                  windSpeed:
+                    type: number
+                  timestamp:
+                    type: string
+                    format: date-time
+        '400':
+          description: Missing parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: number
