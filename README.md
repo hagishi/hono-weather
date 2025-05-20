@@ -1,5 +1,7 @@
 # Hono Weather API
 
+![CI](https://github.com/hagishi/hono-weather/workflows/CI/badge.svg)
+
 A weather API skeleton built with Hono.js that runs at the edge.
 
 ## Features
