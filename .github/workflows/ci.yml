@@ -25,6 +25,5 @@ jobs:
     - name: Build
       run: npm run build
     
-    # Commented out until tests are implemented
-    # - name: Run tests
-    #   run: npm test
+    - name: Run tests
+      run: npm test
