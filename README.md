@@ -49,6 +49,21 @@ npm run build
 npm start
 ```
 
+### Testing
+
+Tests are implemented using [Vitest](https://vitest.dev/).
+
+```bash
+# Run tests once
+npm test
+
+# Run tests in watch mode during development
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
 ## Deployment
 
 This application can be deployed to various edge environments:
